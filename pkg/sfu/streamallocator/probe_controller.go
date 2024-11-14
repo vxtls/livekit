@@ -299,7 +299,6 @@ func (p *ProbeController) pollProbe(probeClusterId ccutils.ProbeClusterId) {
 	p.sendSideBWE.ProbingStart()
 
 	startingEstimate := p.sendSideBWE.GetEstimatedAvailableChannelCapacity()
-
 	go func() {
 		for {
 			p.lock.Lock()

@@ -619,14 +619,6 @@ func (c *congestionDetector) estimateAvailableChannelCapacity() {
 	for idx = len(c.packetGroups) - 1; idx >= 0; idx-- {
 		pg := c.packetGroups[idx]
 		if mst := pg.MinSendTime(); mst != 0 && mst < threshold {
-			c.params.Logger.Infow(
-				"ending agg",
-				"idx", idx,
-				"mst", mst,
-				"threshold", threshold,
-				"numGroups", len(c.packetGroups),
-				"now", mono.UnixMicro()-c.packetTracker.baseSendTime,
-			) // REMOVE
 			break
 		}
 
@@ -639,8 +631,6 @@ func (c *congestionDetector) estimateAvailableChannelCapacity() {
 			"duration", agg.Duration(),
 			"numGroups", len(c.packetGroups),
 			"oldestUsed", max(0, idx),
-			"threshold", threshold,
-			"now", mono.UnixMicro()-c.packetTracker.baseSendTime, // REMOVE
 		)
 		return
 	}
